@@ -1,0 +1,16 @@
+name: stg_smoke
+run-name: stg_smoke ${{ inputs.uuid }}
+on:
+  workflow_dispatch:
+    inputs:
+      uuid:
+        description: UMT staging test row uuid
+        required: true
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: sleep 30
+      - run: test "$(cat .stg-outcome)" = success
